@@ -40,6 +40,17 @@ app.get('/books', (req, res) => {
     res.sendFile(path.resolve('./database/books.json'));
 });
 
+app.get('/books/:id', (req, res) => {
+    const { id } = req.params;
+    const books = readResource('books');
+    const book = books.filter(b => b.id === Number(id))[0];
+    if(!book){
+        res.status(404).send(`Book with id ${id} not found.`):
+        return;
+    }
+    res.send(book);
+});
+
 app.post('/books', (req, res) => {
     const newBook = req.body;
     let isBookvalid = true;
