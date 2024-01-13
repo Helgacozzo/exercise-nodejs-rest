@@ -2,6 +2,7 @@ import express from "express";
 import path from "path";
 import morgan from "morgan";
 
+
 const readResource = async (resourceName) => {
     try {
         const data = fs.readFileSync(path.resolve(`./database/${resourceName}.json`), 'utf-8');
@@ -32,9 +33,9 @@ const app = express();
 app.listen(3000, () => {
     console.log('il server è attivo e in ascolto sulla porta 3000!');
 });
-
 app.use(morgan('dev'));
 app.use(express.json());
+
 
 app.get('/books', (req, res) => {
     res.sendFile(path.resolve('./database/books.json'));
@@ -50,6 +51,7 @@ app.get('/books/:id', (req, res) => {
     }
     res.send(book);
 });
+
 
 app.post('/books', (req, res) => {
     const newBook = req.body;
