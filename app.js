@@ -18,9 +18,9 @@ const writeResource = (resourceName, resource) => {
     fs.writeFileSync(path.resolve(`./database/${resourceName}.json`), data);
 }
 
-const generateId = (resourceName) => {
+const generateId = (resourceName, resource) => {
     const resource = readResource(resourceName);
-    const ids = books.map(b => b.id);
+    const ids = resource.map(b => b.id);
     for(let i=0; i<=ids.length; i++){
         if(!ids.includes(i)){
             return i;
